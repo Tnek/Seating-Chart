@@ -1,0 +1,3 @@
+int studentID, String Firstname, String Lastname, String Gender, String Race, int avoid
+For avoid lines:
+    Firstname, Lastname

@@ -1,0 +1,5 @@
+int number_of_desks_in_section
+for number of desks in section:
+	int occupying studentID (-1 if none), int number of students who've previously sat here, int isEditable (0 if editable, 1 if not)
+	for number of students who've previously sat here:
+		int studentID
