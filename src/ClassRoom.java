@@ -254,6 +254,8 @@ public class ClassRoom
 			for (int i = 0; i < section.getSize(); i++) {
 				Desk desk = section.getDesk(i);
 				ArrayList<Student> previouslyOccupiedStudents = desk.getPreviouslyOccupied();
+				while (previouslyOccupiedStudents.remove(null))
+					;
 				if (desk.getOccupyingStudent() == null) {
 					deskOut += String.format("%d,%d,%d\n", -1, previouslyOccupiedStudents.size(), desk.isEditable() ? 0 : 1);
 				} else {

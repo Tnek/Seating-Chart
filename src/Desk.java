@@ -60,7 +60,7 @@ public class Desk
     public void occupy(Student student) 
     {
         this.student = student;
-    } 
+    }
 
     /**
      * Adds a student to the list of students which previously occupied this desk
@@ -95,7 +95,9 @@ public class Desk
     public Student empty() 
     {
         Student temp = this.student;
-        previous.add(this.student);
+        if (!previous.contains(this.student)) {
+        	previous.add(this.student);
+        }
         this.student = null;
         return temp;
     }
