@@ -11,6 +11,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 
 public class ClassRoom 
 {
@@ -254,19 +255,25 @@ public class ClassRoom
 			for (int i = 0; i < section.getSize(); i++) {
 				Desk desk = section.getDesk(i);
 				ArrayList<Student> previouslyOccupiedStudents = desk.getPreviouslyOccupied();
+				ArrayList<Integer> studentIDList = new ArrayList<Integer>();
+				
+				// Remove fake entries
 				while (previouslyOccupiedStudents.remove(null))
 					;
-				if (desk.getOccupyingStudent() == null) {
-					deskOut += String.format("%d,%d,%d\n", -1, previouslyOccupiedStudents.size(), desk.isEditable() ? 0 : 1);
-				} else {
-					deskOut += String.format("%d,%d,%d\n", desk.getOccupyingStudent().getStudentID(), previouslyOccupiedStudents.size(),desk.isEditable() ? 0 : 1);
-				}
+				
 				for (Student previousStudent : previouslyOccupiedStudents) {
-					if (previousStudent != null) {
-						deskOut += Integer.toString(previousStudent.getStudentID()) + "\n";
-					} else {
-						deskOut += "-1\n";
+					if (!studentIDList.contains(previousStudent.getStudentID())) {
+						studentIDList.add(previousStudent.getStudentID());
 					}
+				}
+
+				if (desk.getOccupyingStudent() == null) {
+					deskOut += String.format("%d,%d,%d\n", -1, studentIDList.size(), desk.isEditable() ? 0 : 1);
+				} else {
+					deskOut += String.format("%d,%d,%d\n", desk.getOccupyingStudent().getStudentID(), studentIDList.size(),desk.isEditable() ? 0 : 1);
+				}
+				for (int studentID: studentIDList) {
+					deskOut += Integer.toString(studentID)+ "\n";
 				}
 			}
 		}
